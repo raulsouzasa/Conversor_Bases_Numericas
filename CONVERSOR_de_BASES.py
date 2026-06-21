@@ -1,6 +1,11 @@
+# TODO: Octal e Hexadecimal
 import sys;
 
 def decimal_para_binario(decimal):
+    '''
+    Converte um numero DECIMAL em BINARIO e o printa.
+    int -> None
+    '''
     resultado = [];
     quociente = decimal;
 
@@ -11,6 +16,10 @@ def decimal_para_binario(decimal):
     print(resultado);
     
 def binario_para_decimal(binario):
+    '''
+    Converte um numero BINARIO em DECIMAL e o printa.
+    str -> None
+    '''
     numeros_str = list(binario);
     numeros_int = [];
     quantidade = len(numeros_str) - 1;
@@ -24,6 +33,10 @@ def binario_para_decimal(binario):
     print(resultado);
 
 def main():
+    '''
+    Função principal.
+    None -> None
+    '''
     escolha: int = 0;
     numero: int = 0;
 
@@ -37,6 +50,7 @@ def main():
             numero = int(input('Digite o numero em DECIMAL para ser convertido em BINARIO: '));
             decimal_para_binario(numero);
         if escolha == 2:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
             numero = input('Digite o numero em BINARIO para ser convertido em DECIMAL: ');
             binario_para_decimal(numero);
     sys.exit();
