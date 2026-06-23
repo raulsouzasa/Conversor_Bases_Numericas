@@ -1,5 +1,3 @@
-# TODO: Decimal para Octal
-# TODO: Decimal para Hexadecimal
 # TODO: Binario para Octal
 # TODO: Binario para Hexadecimal
 # TODO: Octal para Decimal
@@ -12,6 +10,10 @@
 import sys;
 
 def escolha():
+    '''
+    Pede ao usuário uma opção e chama as funções de acordo com a escolha.
+    None -> None
+    '''
     escolha: int = 0;
     valor: int = 0;
 
@@ -23,6 +25,9 @@ def escolha():
         elif escolha == 2:
             valor = int(input('Digite o numero em DECIMAL para ser convertido em OCTAL: '));
             dec_para_oct(valor);
+        elif escolha == 3:
+            valor = int(input('Digite o numero em DECIMAL para ser convertido em HEXADECIMAL: '));
+            dec_para_hex(valor);
         elif escolha == 4:
             # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
             valor = input('Digite o numero em BINARIO para ser convertido em DECIMAL: ');
@@ -55,6 +60,33 @@ def dec_para_oct(decimal):
         resultado.append(quociente % 8);
         quociente = quociente // 8;
     resultado = resultado[::-1];
+    print(resultado);
+
+def dec_para_hex(decimal):
+    '''
+    Converte um numero DECIMAL em HEXADECIMAL e o printa.
+    int -> None
+    '''
+    resultado = [];
+    quociente = decimal;
+
+    while quociente > 0:    
+        resultado.append(str(quociente % 16));
+        quociente = quociente // 16;
+    resultado = resultado[::-1];
+    for i in range(len(resultado)):
+        if resultado[i] == '10':
+            resultado[i] = 'A';
+        elif resultado[i] == '11':
+            resultado[i] = 'B';
+        elif resultado[i] == '12':
+            resultado[i] = 'C';
+        elif resultado[i] == '13':
+            resultado[i] = 'D';
+        elif resultado[i] == '14':
+            resultado[i] = 'E';
+        elif resultado[i] == '15':
+            resultado[i] = 'F';
     print(resultado);
 
 def bin_para_dec(binario):
