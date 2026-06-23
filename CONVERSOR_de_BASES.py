@@ -21,23 +21,23 @@ def escolha():
         escolha = int(input('Digite o numero de uma das operações: '));
         if escolha == 1:
             valor = int(input('Digite o numero em DECIMAL para ser convertido em BINARIO: '));
-            dec_para_bin(valor);
+            resposta(valor, 2, dec_para_bin(valor));
         elif escolha == 2:
             valor = int(input('Digite o numero em DECIMAL para ser convertido em OCTAL: '));
-            dec_para_oct(valor);
+            resposta(valor, 8, dec_para_oct(valor));
         elif escolha == 3:
             valor = int(input('Digite o numero em DECIMAL para ser convertido em HEXADECIMAL: '));
-            dec_para_hex(valor);
+            resposta(valor, 16, dec_para_hex(valor));
         elif escolha == 4:
             # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
             valor = input('Digite o numero em BINARIO para ser convertido em DECIMAL: ');
-            bin_para_dec(valor);
+            resposta(valor, 10, bin_para_dec(valor));
     sys.exit();
 
 def dec_para_bin(decimal):
     '''
-    Converte um numero DECIMAL em BINARIO e o printa.
-    int -> None
+    Converte um numero DECIMAL em BINARIO e o retorna.
+    int -> list
     '''
     resultado = [];
     quociente = decimal;
@@ -46,12 +46,12 @@ def dec_para_bin(decimal):
         resultado.append(quociente % 2);
         quociente = quociente // 2;
     resultado = resultado[::-1];
-    print(resultado);
+    return resultado;
 
 def dec_para_oct(decimal):
     '''
-    Converte um numero DECIMAL em OCTAL e o printa.
-    int -> None
+    Converte um numero DECIMAL em OCTAL e o retorna.
+    int -> list
     '''
     resultado = [];
     quociente = decimal;
@@ -60,12 +60,12 @@ def dec_para_oct(decimal):
         resultado.append(quociente % 8);
         quociente = quociente // 8;
     resultado = resultado[::-1];
-    print(resultado);
+    return resultado;
 
 def dec_para_hex(decimal):
     '''
-    Converte um numero DECIMAL em HEXADECIMAL e o printa.
-    int -> None
+    Converte um numero DECIMAL em HEXADECIMAL e o retorna.
+    int -> list
     '''
     resultado = [];
     quociente = decimal;
@@ -87,12 +87,12 @@ def dec_para_hex(decimal):
             resultado[i] = 'E';
         elif resultado[i] == '15':
             resultado[i] = 'F';
-    print(resultado);
+    return resultado;
 
 def bin_para_dec(binario):
     '''
-    Converte um numero BINARIO em DECIMAL e o printa.
-    str -> None
+    Converte um numero BINARIO em DECIMAL e o retorna.
+    str -> int
     '''
     numeros_str = list(binario);
     numeros_int = [];
@@ -104,11 +104,34 @@ def bin_para_dec(binario):
         numeros_int.append(int(num));
         resultado = resultado + (numeros_int[i] * (2 ** (quantidade - i)));
         i+=1
-    print(resultado);
+    return resultado;
+
+def resposta(numero, base, resultado):
+    '''
+    Apresenta a resposta formatada de uma conversão. 
+    Any, int, list ou Any -> None
+    '''
+    conversao: str = '';
+    saida: str = '';
+
+    if base == 10:
+        conversao = 'DECIMAL';
+    elif base == 2:
+        conversao = 'BINARIO';
+    elif base == 8:
+        conversao = 'OCTAL';
+    elif base == 16:
+        conversao = 'HEXADECIMAL';
+    if type(resultado) == list:
+        for valor in resultado:
+            saida = saida + str(valor);
+    else:
+        saida = str(resultado);
+    print(f'{numero} -> {conversao} = {saida}');
 
 def main():
     '''
-    Função principal.
+    Procedimento principal.
     None -> None
     '''
     print('Operações:');
