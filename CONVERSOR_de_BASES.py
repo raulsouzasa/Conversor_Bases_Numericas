@@ -1,7 +1,35 @@
-# TODO: Octal e Hexadecimal
+# TODO: Decimal para Octal
+# TODO: Decimal para Hexadecimal
+# TODO: Binario para Octal
+# TODO: Binario para Hexadecimal
+# TODO: Octal para Decimal
+# TODO: Octal para Binario
+# TODO: Octal para Hexadecimal
+# TODO: Hexadecimal para Decimal
+# TODO: Hexadecimal para Binario
+# TODO: Hexadecimal para Octal
+
 import sys;
 
-def decimal_para_binario(decimal):
+def escolha():
+    escolha: int = 0;
+    valor: int = 0;
+
+    while escolha != 13:
+        escolha = int(input('Digite o numero de uma das operações: '));
+        if escolha == 1:
+            valor = int(input('Digite o numero em DECIMAL para ser convertido em BINARIO: '));
+            dec_para_bin(valor);
+        elif escolha == 2:
+            valor = int(input('Digite o numero em DECIMAL para ser convertido em OCTAL: '));
+            dec_para_oct(valor);
+        elif escolha == 4:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
+            valor = input('Digite o numero em BINARIO para ser convertido em DECIMAL: ');
+            bin_para_dec(valor);
+    sys.exit();
+
+def dec_para_bin(decimal):
     '''
     Converte um numero DECIMAL em BINARIO e o printa.
     int -> None
@@ -11,11 +39,25 @@ def decimal_para_binario(decimal):
 
     while quociente > 0:    
         resultado.append(quociente % 2);
-        quociente = quociente // 2
+        quociente = quociente // 2;
     resultado = resultado[::-1];
     print(resultado);
-    
-def binario_para_decimal(binario):
+
+def dec_para_oct(decimal):
+    '''
+    Converte um numero DECIMAL em OCTAL e o printa.
+    int -> None
+    '''
+    resultado = [];
+    quociente = decimal;
+
+    while quociente > 0:    
+        resultado.append(quociente % 8);
+        quociente = quociente // 8;
+    resultado = resultado[::-1];
+    print(resultado);
+
+def bin_para_dec(binario):
     '''
     Converte um numero BINARIO em DECIMAL e o printa.
     str -> None
@@ -37,23 +79,21 @@ def main():
     Função principal.
     None -> None
     '''
-    escolha: int = 0;
-    numero: int = 0;
-
-    while escolha != 3:
-        print('Operações:');
-        print('1 - Decimal para Binario');
-        print('2 - Binario para Decimal');
-        print('3 - Fechar Programa');
-        escolha = int(input('Digite o numero de uma das operações: '));
-        if escolha == 1:
-            numero = int(input('Digite o numero em DECIMAL para ser convertido em BINARIO: '));
-            decimal_para_binario(numero);
-        if escolha == 2:
-            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
-            numero = input('Digite o numero em BINARIO para ser convertido em DECIMAL: ');
-            binario_para_decimal(numero);
-    sys.exit();
+    print('Operações:');
+    print('1 - Decimal para Binario');
+    print('2 - Decimal para Octal');
+    print('3 - Decimal para Hexadecimal');
+    print('4 - Binario para Decimal');
+    print('5 - Binario para Octal')
+    print('6 - Binario para Hexadecimal');
+    print('7 - Octal para Decimal');
+    print('8 - Octal para Binario');
+    print('9 - Octal para Hexadecimal');
+    print('10 - Hexadecimal para Decimal');
+    print('11 - Hexadecimal para Binario');
+    print('12 - Hexadecimal para Octal');
+    print('13 - Fechar Programa');
+    escolha();
     
 if __name__ == '__main__':
     main();
