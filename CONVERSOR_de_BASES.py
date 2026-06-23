@@ -1,4 +1,3 @@
-# TODO: Binario para Octal
 # TODO: Binario para Hexadecimal
 # TODO: Octal para Decimal
 # TODO: Octal para Binario
@@ -32,6 +31,10 @@ def escolha():
             # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
             valor = input('Digite o numero em BINARIO para ser convertido em DECIMAL: ');
             resposta(valor, 10, bin_para_dec(valor));
+        elif escolha == 5:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
+            valor = input('Digite o numero em BINARIO para ser convertido em OCTAL: ');
+            resposta(valor, 8, bin_para_oct(valor));
     sys.exit();
 
 def dec_para_bin(decimal):
@@ -105,6 +108,29 @@ def bin_para_dec(binario):
         resultado = resultado + (numeros_int[i] * (2 ** (quantidade - i)));
         i+=1
     return resultado;
+
+def bin_para_oct(binario):
+    '''
+    Converte um numero BINARIO em OCTAL e o retorna
+    str -> str
+    '''
+    numeros_str = list(binario);
+    tamanho = len(numeros_str);
+    bloco: str = '';
+    resultado: str = '';
+
+    if tamanho % 3 != 0:
+        while tamanho % 3 > 0:
+            numeros_str = numeros_str[::-1] + ['0'];
+            tamanho = len(numeros_str);
+        numeros_str = numeros_str[::-1];
+    for i in range(tamanho):
+            bloco = bloco + numeros_str[i];
+            if len(bloco) == 3:
+                resultado = resultado + str(bin_para_dec(bloco));
+                bloco = '';
+    return resultado;
+
 
 def resposta(numero, base, resultado):
     '''
