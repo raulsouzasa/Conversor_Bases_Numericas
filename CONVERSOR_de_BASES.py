@@ -1,4 +1,3 @@
-# TODO: Binario para Hexadecimal
 # TODO: Octal para Decimal
 # TODO: Octal para Binario
 # TODO: Octal para Hexadecimal
@@ -35,6 +34,10 @@ def escolha():
             # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
             valor = input('Digite o numero em BINARIO para ser convertido em OCTAL: ');
             resposta(valor, 8, bin_para_oct(valor));
+        elif escolha == 6:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
+            valor = input('Digite o numero em BINARIO para ser convertido em HEXADECIMAL: ');
+            resposta(valor, 16, bin_para_hex(valor));
     sys.exit();
 
 def dec_para_bin(decimal):
@@ -120,8 +123,9 @@ def bin_para_oct(binario):
     resultado: str = '';
 
     if tamanho % 3 != 0:
+        numeros_str = numeros_str[::-1];
         while tamanho % 3 > 0:
-            numeros_str = numeros_str[::-1] + ['0'];
+            numeros_str = numeros_str + ['0'];
             tamanho = len(numeros_str);
         numeros_str = numeros_str[::-1];
     for i in range(tamanho):
@@ -131,6 +135,41 @@ def bin_para_oct(binario):
                 bloco = '';
     return resultado;
 
+def bin_para_hex(binario):
+    '''
+    Converte um numero BINARIO em HEXADECIMAl e o retorna
+    str -> str
+    '''
+    numeros_str = list(binario);
+    tamanho = len(numeros_str);
+    bloco: str = '';
+    resultado: str = '';
+
+    if tamanho % 4 != 0:
+        numeros_str = numeros_str[::-1];
+        while tamanho % 4 > 0:
+            numeros_str = numeros_str + ['0'];
+            tamanho = len(numeros_str);
+        numeros_str = numeros_str[::-1];
+    for i in range(tamanho):
+            bloco = bloco + numeros_str[i];
+            if len(bloco) == 4:
+                if bloco == '1010':
+                    resultado = resultado + 'A';
+                elif bloco == '1011':
+                    resultado = resultado + 'B';
+                elif bloco == '1100':
+                    resultado = resultado + 'C';
+                elif bloco == '1101':
+                    resultado = resultado + 'D';
+                elif bloco == '1110':
+                    resultado = resultado + 'E';
+                elif bloco == '1111':
+                    resultado = resultado + 'F';
+                else:
+                    resultado = resultado + str(bin_para_dec(bloco));
+                bloco = '';
+    return resultado;
 
 def resposta(numero, base, resultado):
     '''
