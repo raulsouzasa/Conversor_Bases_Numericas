@@ -1,7 +1,3 @@
-# TODO: Hexadecimal para Decimal
-# TODO: Hexadecimal para Binario
-# TODO: Hexadecimal para Octal
-
 import sys;
 
 def escolha():
@@ -47,6 +43,18 @@ def escolha():
             # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
             valor = input('Digite o numero em OCTAL para ser convertido em HEXADECIMAL: ');
             resposta(valor, 16, oct_para_hex(valor));
+        elif escolha == 10:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
+            valor = input('Digite o numero em HEXADECIMAL para ser convertido em DECIMAL: ');
+            resposta(valor, 10, hex_para_dec(valor));
+        elif escolha == 11:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
+            valor = input('Digite o numero em HEXADECIMAL para ser convertido em BINARIO: ');
+            resposta(valor, 2, hex_para_bin(valor));
+        elif escolha == 12:
+            # O input aqui não sera convertido em int pois dentro da função ele sera transformado em uma list.
+            valor = input('Digite o numero em HEXADECIMAL para ser convertido em OCTAL: ');
+            resposta(valor, 8, hex_para_oct(valor));
     sys.exit();
 
 def dec_para_bin(decimal):
@@ -197,7 +205,6 @@ def oct_para_dec(octal):
         i+=1
     return resultado;
 
-
 def oct_para_bin(octal):
     '''
     Converte um numero OCTAL em BINARIO e o retorna
@@ -227,6 +234,81 @@ def oct_para_hex(octal):
     for num in binarios:
         resultado = resultado + str(num);
     resultado = bin_para_hex(resultado);
+    return resultado;
+
+def hex_para_dec(hexadecimal):
+    '''
+    Converte um numero HEXADECIMAL em DECIMAL e o retorna
+    str -> int
+    '''
+    numeros_str = list(hexadecimal);
+    numeros_int = [];
+    quantidade = len(numeros_str) - 1;
+    resultado: int = 0;
+    i: int = 0;
+
+    for num in numeros_str:
+        if num == 'A':
+            numeros_int.append(10);
+        elif num == 'B':
+            numeros_int.append(11);
+        elif num == 'C':
+            numeros_int.append(12);
+        elif num == 'D':
+            numeros_int.append(13);
+        elif num == 'E':
+            numeros_int.append(14);
+        elif num == 'F':
+            numeros_int.append(15);
+        else:
+            numeros_int.append(int(num));
+        resultado = resultado + (numeros_int[i] * (16 ** (quantidade - i)));
+        i+=1
+    return resultado;
+
+def hex_para_bin(hexadecimal):
+    '''
+    Converte um numero HEXADECIMAL em BINARIO e o retorna
+    str -> list
+    '''
+    numeros_str = list(hexadecimal);
+    tamanho = len(numeros_str);
+    binario = [];
+    resultado = [];
+
+    for i in range(tamanho):
+        if numeros_str[i] == 'A':
+            binario = dec_para_bin(10);
+        elif numeros_str[i] == 'B':
+            binario = dec_para_bin(11);
+        elif numeros_str[i] == 'C':
+            binario = dec_para_bin(12);
+        elif numeros_str[i] == 'D':
+            binario = dec_para_bin(13);
+        elif numeros_str[i] == 'E':
+            binario = dec_para_bin(14);
+        elif numeros_str[i] == 'F':
+            binario = dec_para_bin(15);
+        else:
+            binario = dec_para_bin(int(numeros_str[i]));
+        if len(binario) < 4 :
+            while len(binario) < 4:
+                binario.insert(0, 0);
+        resultado = resultado + binario;
+    return resultado;
+
+def hex_para_oct(hexadecimal):
+    '''
+    Converte um numero HEXADECIMAL em OCTAL e o retorna
+    str -> str
+    '''
+    binario = [];
+    resultado = [];
+
+    binario = hex_para_bin(hexadecimal);
+    for num in binario:
+        resultado.append((str(num)));
+    resultado = bin_para_oct(resultado);
     return resultado;
 
 def resposta(numero, base, resultado):
